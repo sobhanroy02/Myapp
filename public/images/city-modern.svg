@@ -1,0 +1,95 @@
+<svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2C5282;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5B21B6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="400" height="250" fill="url(#skyGradient)"/>
+  
+  <!-- Sun -->
+  <circle cx="320" cy="60" r="25" fill="#FFD700" opacity="0.8"/>
+  
+  <!-- Buildings -->
+  <!-- Building 1 -->
+  <rect x="20" y="120" width="45" height="130" fill="url(#buildingGradient1)" rx="2"/>
+  <rect x="25" y="130" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  <rect x="37" y="130" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  <rect x="25" y="150" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  <rect x="37" y="170" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  
+  <!-- Building 2 -->
+  <rect x="70" y="80" width="60" height="170" fill="url(#buildingGradient2)" rx="3"/>
+  <rect x="78" y="95" width="12" height="15" fill="#FFE135" opacity="0.9"/>
+  <rect x="95" y="95" width="12" height="15" fill="#FFE135" opacity="0.9"/>
+  <rect x="112" y="95" width="12" height="15" fill="#FFE135" opacity="0.9"/>
+  <rect x="78" y="125" width="12" height="15" fill="#FFE135" opacity="0.7"/>
+  <rect x="95" y="125" width="12" height="15" fill="#FFE135" opacity="0.9"/>
+  <rect x="112" y="125" width="12" height="15" fill="#FFE135" opacity="0.8"/>
+  <rect x="78" y="155" width="12" height="15" fill="#FFE135" opacity="0.8"/>
+  <rect x="95" y="155" width="12" height="15" fill="#FFE135" opacity="0.6"/>
+  
+  <!-- Building 3 (tallest) -->
+  <rect x="135" y="40" width="50" height="210" fill="url(#buildingGradient3)" rx="2"/>
+  <rect x="142" y="60" width="10" height="12" fill="#FFE135" opacity="0.9"/>
+  <rect x="155" y="60" width="10" height="12" fill="#FFE135" opacity="0.8"/>
+  <rect x="168" y="60" width="10" height="12" fill="#FFE135" opacity="0.7"/>
+  <rect x="142" y="85" width="10" height="12" fill="#FFE135" opacity="0.8"/>
+  <rect x="155" y="85" width="10" height="12" fill="#FFE135" opacity="0.9"/>
+  <rect x="168" y="85" width="10" height="12" fill="#FFE135" opacity="0.8"/>
+  <rect x="142" y="110" width="10" height="12" fill="#FFE135" opacity="0.7"/>
+  <rect x="155" y="110" width="10" height="12" fill="#FFE135" opacity="0.8"/>
+  <rect x="168" y="110" width="10" height="12" fill="#FFE135" opacity="0.9"/>
+  
+  <!-- Building 4 -->
+  <rect x="190" y="100" width="40" height="150" fill="url(#buildingGradient1)" rx="2"/>
+  <rect x="196" y="115" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  <rect x="208" y="115" width="8" height="10" fill="#FFE135" opacity="0.9"/>
+  <rect x="220" y="115" width="8" height="10" fill="#FFE135" opacity="0.7"/>
+  <rect x="196" y="140" width="8" height="10" fill="#FFE135" opacity="0.9"/>
+  <rect x="208" y="140" width="8" height="10" fill="#FFE135" opacity="0.8"/>
+  
+  <!-- Building 5 -->
+  <rect x="235" y="90" width="55" height="160" fill="url(#buildingGradient2)" rx="3"/>
+  <rect x="243" y="108" width="11" height="13" fill="#FFE135" opacity="0.8"/>
+  <rect x="258" y="108" width="11" height="13" fill="#FFE135" opacity="0.9"/>
+  <rect x="273" y="108" width="11" height="13" fill="#FFE135" opacity="0.7"/>
+  <rect x="243" y="135" width="11" height="13" fill="#FFE135" opacity="0.9"/>
+  <rect x="258" y="135" width="11" height="13" fill="#FFE135" opacity="0.8"/>
+  <rect x="273" y="135" width="11" height="13" fill="#FFE135" opacity="0.9"/>
+  
+  <!-- Building 6 -->
+  <rect x="295" y="110" width="45" height="140" fill="url(#buildingGradient3)" rx="2"/>
+  <rect x="302" y="125" width="9" height="11" fill="#FFE135" opacity="0.8"/>
+  <rect x="315" y="125" width="9" height="11" fill="#FFE135" opacity="0.9"/>
+  <rect x="328" y="125" width="9" height="11" fill="#FFE135" opacity="0.8"/>
+  <rect x="302" y="150" width="9" height="11" fill="#FFE135" opacity="0.7"/>
+  <rect x="315" y="150" width="9" height="11" fill="#FFE135" opacity="0.8"/>
+  
+  <!-- Building 7 -->
+  <rect x="345" y="130" width="35" height="120" fill="url(#buildingGradient1)" rx="2"/>
+  <rect x="351" y="145" width="7" height="9" fill="#FFE135" opacity="0.8"/>
+  <rect x="362" y="145" width="7" height="9" fill="#FFE135" opacity="0.9"/>
+  <rect x="351" y="165" width="7" height="9" fill="#FFE135" opacity="0.7"/>
+  <rect x="362" y="165" width="7" height="9" fill="#FFE135" opacity="0.8"/>
+  
+  <!-- Ground/street -->
+  <rect x="0" y="240" width="400" height="10" fill="#4A5568"/>
+  
+  <!-- Street details -->
+  <rect x="0" y="245" width="400" height="2" fill="#FFF" opacity="0.3"/>
+</svg>

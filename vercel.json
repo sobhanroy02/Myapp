@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "redirects": [
+    { "source": "/index-backup", "destination": "/", "statusCode": 308 },
+    { "source": "/legacy-index", "destination": "/", "statusCode": 308 }
+  ],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}

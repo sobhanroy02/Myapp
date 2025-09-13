@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --transition: 200ms;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+.container {
+  max-width: 1100px;
+}
+
+/* Keyframes for landing animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-14px) translateX(6px); }
+  50% { transform: translateY(4px) translateX(-4px); }
+  75% { transform: translateY(-10px) translateX(4px); }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Utility helpers (if Tailwind config not extended) */
+.animate-gradient-x { animation: gradient-x 6s ease-in-out infinite; }
+
+@keyframes float-slow {
+  0%,100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-18px) translateX(8px); }
+}
+
+@keyframes pulse-fade {
+  0%,100% { opacity: .55; }
+  50% { opacity: .15; }
+}
+
+.animate-float-slow { animation: float-slow 10s ease-in-out infinite; }
+.animate-pulse-fade { animation: pulse-fade 8s ease-in-out infinite; }
+
+.backdrop-glass {
+  @apply bg-white/60 dark:bg-gray-900/50 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-2xl;
+}

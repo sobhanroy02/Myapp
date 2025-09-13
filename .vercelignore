@@ -1,0 +1,12 @@
+.next
+node_modules
+.env.local
+.env.development
+.env.test
+.DS_Store
+**/index-backup.js
+**/legacy-index.js
+**/*.log
+.idea
+.vscode
+public/workbox-*.js*
