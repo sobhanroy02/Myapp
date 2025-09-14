@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
   "redirects": [
     { "source": "/index-backup", "destination": "/", "statusCode": 308 },
     { "source": "/legacy-index", "destination": "/", "statusCode": 308 }
