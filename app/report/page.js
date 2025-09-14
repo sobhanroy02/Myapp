@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createIssue, analyzeImageWithAI } from '../../lib/api';
 
 const CATEGORIES = [
   { name: 'Pothole', icon: '🛠️', bgColor: 'bg-orange-50', textColor: 'text-orange-600', borderColor: 'border-orange-200' },
@@ -12,16 +14,44 @@ const CATEGORIES = [
 ]
 
 export default function ReportPage() {
+  const router = useRouter()
   const [selectedCategory, setSelectedCategory] = useState('')
   const [description, setDescription] = useState('')
   const [uploadedFile, setUploadedFile] = useState(null)
   const [location, setLocation] = useState('')
+  const [title, setTitle] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission
-    alert('Report submitted successfully!')
-  }
+  // Inside your existing component's handleSubmit function
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    try {
+        // NEW WAY: A clean, simple function call.
+        const aiResults = await analyzeImageWithAI(uploadedFile);
+
+        const issueData = {
+            title: title,
+            description: description,
+            category: aiResults.detections[0]?.class_name || selectedCategory || 'Uncategorized',
+            location: location,
+            imageUrl: "http://example.com/image.jpg", // This will be updated later
+        };
+
+        // ANOTHER NEW WAY: A second clean, simple function call.
+        await createIssue(issueData);
+        
+        router.push('/'); // Redirect on success
+
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setIsLoading(false);
+    }
+};
 
   return (
     <main className="min-h-screen bg-white text-gray-800">
