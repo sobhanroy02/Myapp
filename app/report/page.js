@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createIssue, analyzeImageWithAI } from '../../lib/api';
+import { createIssue, analyzeImageWithAI } from '../../lib/api'
+import { auth } from '../../lib/firebase';
 
 const CATEGORIES = [
   { name: 'Pothole', icon: '🛠️', bgColor: 'bg-orange-50', textColor: 'text-orange-600', borderColor: 'border-orange-200' },
@@ -29,25 +30,75 @@ const handleSubmit = async (e) => {
     setIsLoading(true);
     setError(null);
 
+    // Check authentication first
+    const user = auth.currentUser;
+    if (!user) {
+        setError('Please log in to submit a report. Redirecting to login page...');
+        setIsLoading(false);
+        setTimeout(() => {
+            router.push('/auth');
+        }, 2000);
+        return;
+    }
+
+    // Form validation
+    if (!title.trim()) {
+        setError('Please enter a title for the issue');
+        setIsLoading(false);
+        return;
+    }
+
+    if (!description.trim()) {
+        setError('Please provide a description of the issue');
+        setIsLoading(false);
+        return;
+    }
+
+    if (!location.trim()) {
+        setError('Please provide a location for the issue');
+        setIsLoading(false);
+        return;
+    }
+
     try {
-        // NEW WAY: A clean, simple function call.
-        const aiResults = await analyzeImageWithAI(uploadedFile);
+        let finalCategory = selectedCategory || 'Uncategorized';
+        
+        // Only try ML analysis if file is uploaded
+        if (uploadedFile) {
+            try {
+                const aiResults = await analyzeImageWithAI(uploadedFile);
+                finalCategory = aiResults.detections[0]?.class_name || selectedCategory || 'Uncategorized';
+            } catch (mlError) {
+                console.warn('ML analysis failed, using selected category:', mlError);
+                // Continue with selected category if ML fails
+            }
+        }
 
         const issueData = {
-            title: title,
-            description: description,
-            category: aiResults.detections[0]?.class_name || selectedCategory || 'Uncategorized',
-            location: location,
+            title: title.trim(),
+            description: description.trim(),
+            category: finalCategory,
+            location: location.trim(),
             imageUrl: "http://example.com/image.jpg", // This will be updated later
         };
 
-        // ANOTHER NEW WAY: A second clean, simple function call.
+        // Create the issue
         await createIssue(issueData);
         
-        router.push('/'); // Redirect on success
+        // Reset form on success
+        setTitle('');
+        setDescription('');
+        setLocation('');
+        setSelectedCategory('');
+        setUploadedFile(null);
+        
+        // Show success message or redirect
+        alert('Issue reported successfully!');
+        router.push('/dashboard'); // Redirect to dashboard
 
     } catch (err) {
-        setError(err.message);
+        console.error('Error submitting report:', err);
+        setError(err.message || 'Failed to submit report. Please try again.');
     } finally {
         setIsLoading(false);
     }
@@ -97,6 +148,19 @@ const handleSubmit = async (e) => {
                       </button>
                     ))}
                   </div>
+                </div>
+
+                {/* Title Field */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">Issue Title</label>
+                  <input 
+                    type="text" 
+                    placeholder="Brief title describing the issue"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-300 focus:border-transparent text-sm"
+                    required
+                  />
                 </div>
 
                 {/* Photo Upload */}
@@ -156,12 +220,31 @@ const handleSubmit = async (e) => {
                   <div className="text-xs text-gray-400 mt-1">{description.length}/500 characters</div>
                 </div>
 
+                {/* Error Display */}
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-xl">
+                    <p className="text-red-600 text-sm font-medium">⚠️ {error}</p>
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3 bg-gradient-to-r from-sky-400 to-teal-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm sm:text-base"
+                  disabled={isLoading}
+                  className={`w-full py-3 font-semibold rounded-xl shadow-lg transition-all text-sm sm:text-base ${
+                    isLoading 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-sky-400 to-teal-500 hover:shadow-xl text-white'
+                  }`}
                 >
-                  Submit Report
+                  {isLoading ? (
+                    <span className="flex items-center justify-center">
+                      <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+                      Submitting...
+                    </span>
+                  ) : (
+                    'Submit Report'
+                  )}
                 </button>
               </form>
             </div>
